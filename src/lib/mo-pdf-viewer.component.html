@@ -337,6 +337,7 @@
                           tabindex="-1"
                           style="height: 35px"
                           (click)="removeComment(comment)"
+                          (keyup)="removeComment(comment)"
                         >
                           Delete
 
@@ -356,6 +357,7 @@
                         </li>
                         <li
                           (click)="editComment(comment)"
+                          (keyup)="editComment(comment)"
                           *ngIf="!comment.editMode"
                           tabindex="-1"
                           style="height: 35px"
@@ -424,10 +426,9 @@
           <ng-container *ngFor="let category of searchCategories">
             <li
               class="ccc clickable top-category"
-              [class.active-top-category]="
-                selectedSearchCategory === category.label
-              "
+              [class.active-top-category]="selectedSearchCategory === category.label"
               (click)="selectSearchCategory(category.label)"
+              (keyup)="selectSearchCategory(category.label)"
               (keyup.enter)="selectSearchCategory(category.label)"
               [ngbTooltip]="category.label"
               tabindex="-1"
