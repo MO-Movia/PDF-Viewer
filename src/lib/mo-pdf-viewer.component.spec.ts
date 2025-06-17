@@ -499,12 +499,10 @@ describe('MoPdfViewerComponent', () => {
   });
 
   it('should select selection', () => {
-    const element = {
-      classList: {
-        remove: (): void => {},
-      },
-    } as Element;
-    spyOn(element.classList, 'remove');
+    const element = document.createElement('span');
+    element.classList.add('span.match-active');
+    element.classList.add('match-active');
+    const removeClassSpy = spyOn(element.classList, 'remove');
     spyOn(document, 'querySelectorAll').and.returnValue([
       element,
     ] as unknown as NodeListOf<Element>);
@@ -512,11 +510,11 @@ describe('MoPdfViewerComponent', () => {
       pageNumber: 5,
       spanIndex: 6,
     };
-    spyOn(component, 'setSpanClassFromLocation');
+    spyOn(component, 'setSpanClassFromLocation').and.returnValue(undefined);
     component.selectSelection({
       spanLocations: [location],
     });
-    expect(element.classList.remove).toHaveBeenCalled();
+    expect(removeClassSpy).toHaveBeenCalled();
     expect(component.setSpanClassFromLocation).toHaveBeenCalledWith(location,
       'match-active');
   });
@@ -1093,12 +1091,7 @@ describe('MoPdfViewerComponent', () => {
       pageNumber: 3,
     };
     const selectionMap = new Map<Element, Set<string>>();
-    const targetSpan = {
-      classList: {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        remove: (htmlClass: string) => {},
-      },
-    } as Element;
+    const targetSpan = document.createElement('span');
     const testSet = new Set<string>();
     testSet.add('testId');
     selectionMap.set(targetSpan, testSet);
@@ -1134,12 +1127,7 @@ describe('MoPdfViewerComponent', () => {
       pageNumber: 3,
     };
     const selectionMap = new Map<Element, Set<string>>();
-    const targetSpan = {
-      classList: {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        remove: (htmlClass: string) => {},
-      },
-    } as Element;
+    const targetSpan = document.createElement('span');
     const textLayer = {
       querySelectorAll: () => {
         return [{}, {}, targetSpan, {}, {}];
