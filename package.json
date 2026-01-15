@@ -65,7 +65,7 @@
     "@angular/cli": "^17.2.3",
     "@angular/compiler": "^17.2.4",
     "@angular/compiler-cli": "^17.2.3",
-    "@stylistic/eslint-plugin": "^1.5.4",
+    "@stylistic/eslint-plugin": "^5.7.0",
     "@types/jasmine": "~5.1.0",
     "@types/uuid": "^9.0.8",
     "@typescript-eslint/eslint-plugin": "^6.4.0",
